@@ -7,10 +7,13 @@ from subprocess import Popen, PIPE
 import re
 
 parser = ArgumentParser("Connect to a mininet node and run a command")
+
 parser.add_argument('--node',
                     help="The node's name (e.g., h1, h2, etc.)")
+
 parser.add_argument('--list', action="store_true", default=False,
                     help="List all running nodes.")
+
 parser.add_argument('--cmd', default='ifconfig',
                     nargs="+",
                     help="Command to run inside node.")
@@ -18,12 +21,12 @@ parser.add_argument('--cmd', default='ifconfig',
 FLAGS = parser.parse_args()
 node_pat = re.compile(r'.*bash ... mininet:(.*)')
 
-
 def list_nodes(do_print=False):
     cmd = 'ps aux'
     proc = Popen(cmd.split(), stdout=PIPE)
     out, err = proc.communicate()
-    # Mapping from name to pid.
+
+    # Mapping from name (hosts and routers) to pid.
     ret = {}
     for line in out.split('\n'):
         match = node_pat.match(line)
@@ -31,18 +34,24 @@ def list_nodes(do_print=False):
             continue
         name = match.group(1)
         pid = line.split()[1]
+
         if do_print:
             print "name: %6s, pid: %6s" % (name, pid)
+
         ret[name] = pid
     return ret
 
 
 def main():
     if FLAGS.list:
+        # 1
+        print "1"
         list_nodes(do_print=True)
         return
 
     if not FLAGS.node:
+        # 2
+        print "2"
         parser.print_help()
         return
 
