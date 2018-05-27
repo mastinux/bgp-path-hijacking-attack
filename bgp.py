@@ -66,7 +66,7 @@ class SimpleTopo(Topo):
     def __init__(self):
         # Add default members to class.
         super(SimpleTopo, self ).__init__()
-        num_hosts_per_as = 3
+        num_hosts_per_as = 1
         num_ases = 3
         num_hosts = num_hosts_per_as * num_ases
 

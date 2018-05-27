@@ -2,4 +2,4 @@
 
 *.pyc
 
-logs/*
+logs/*stdout
