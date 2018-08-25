@@ -16,7 +16,7 @@ parser.add_argument('--cmd', default='ifconfig',
                     help="Command to run inside node.")
 
 FLAGS = parser.parse_args()
-node_pat = re.compile(r'.*bash --norc -is mininet:(.*)')
+node_pat = re.compile(r'.*bash -ms mininet:(.*)')
 
 
 def list_nodes(do_print=False):
@@ -25,6 +25,7 @@ def list_nodes(do_print=False):
     cmd = 'ps aux'
     proc = Popen(cmd.split(), stdout=PIPE)
     out, err = proc.communicate()
+
     # Mapping from name to pid.
     ret = {}
     for line in out.split('\n'):
@@ -50,6 +51,7 @@ def main():
 
     pid_by_name = list_nodes()
     pid = pid_by_name.get(FLAGS.node)
+
     if pid is None:
         print "node `%s' not found" % (FLAGS.node)
         sys.exit(1)

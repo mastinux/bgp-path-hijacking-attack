@@ -19,6 +19,8 @@ class Handler(SimpleHTTPServer.SimpleHTTPRequestHandler):
         self.wfile.flush()
 
 
+print "starting webserver serving", FLAGS.text
+
 PORT = 80
 httpd = SocketServer.TCPServer(("", PORT), Handler)
 httpd.serve_forever()

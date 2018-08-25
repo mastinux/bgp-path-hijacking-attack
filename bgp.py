@@ -118,11 +118,11 @@ def getGateway(hostname):
 
 def startWebserver(net, hostname, text="Default web server"):
     host = net.getNodeByName(hostname)
-    return host.popen("python webserver.py --text '%s'" % text, shell=True)
+    return host.popen("python webserver.py --text '%s' > /tmp/%s.log" % (text, hostname), shell=True)
 
 
 def main():
-    os.system("rm -f /tmp/R*.log /tmp/R*.pid logs/*stdout")
+    os.system("rm -f /tmp/R*.log /tmp/h*.log /tmp/*R*.pid logs/*stdout")
     os.system("mn -c >/dev/null 2>&1")
     os.system("killall -9 zebra bgpd > /dev/null 2>&1")
     os.system('pgrep -f webserver.py | xargs kill -9')
@@ -140,9 +140,9 @@ def main():
     for router in net.switches:
         if router.name == ROGUE_AS_NAME and not FLAGS_rogue_as:
             continue
-        router.cmd("/usr/lib/quagga/zebra -f conf/zebra-%s.conf -d -i /tmp/zebra-%s.pid > logs/%s-zebra-stdout 2>&1" % (router.name, router.name, router.name))
+        router.cmd("~/quagga-1.2.4/zebra/zebra -f conf/zebra-%s.conf -d -i /tmp/zebra-%s.pid > logs/%s-zebra-stdout 2>&1" % (router.name, router.name, router.name))
         router.waitOutput()
-        router.cmd("/usr/lib/quagga/bgpd -f conf/bgpd-%s.conf -d -i /tmp/bgp-%s.pid > logs/%s-bgpd-stdout 2>&1" % (router.name, router.name, router.name), shell=True)
+        router.cmd("~/quagga-1.2.4/bgpd/bgpd -f conf/bgpd-%s.conf -d -i /tmp/bgp-%s.pid > logs/%s-bgpd-stdout 2>&1" % (router.name, router.name, router.name), shell=True)
         router.waitOutput()
         log("Starting zebra and bgpd on %s" % router.name)
 
