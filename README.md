@@ -6,9 +6,9 @@ Code analized and commented for research purpose
 
 ---
 
-## Preparing quagga
+## Quagga preparation
 
-- download quagga-1.2.4 from (here)[http://download.savannah.gnu.org/releases/quagga/] in your $HOME and extract it
+- download quagga-1.2.4 from [here](http://download.savannah.gnu.org/releases/quagga/) in your `$HOME` and extract it
 
 - `cd ~/quagga-1.2.4`
 
