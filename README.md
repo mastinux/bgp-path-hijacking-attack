@@ -2,9 +2,23 @@
 
 Base code available here: https://bitbucket.org/jvimal/bgp
 
-Code analized and commented for research purpose
+Code analized and commented
 
 ---
+
+## Mininet preparation
+
+- `git clone https://github.com/mininet/mininet`
+
+- `cd mininet`
+
+- `git checkout 2.3.0d4`
+
+- `util/install.sh -a`
+
+- `mn --test pingall`
+
+- `mn --version`
 
 ## Quagga preparation
 
@@ -19,3 +33,4 @@ Code analized and commented for research purpose
 - `./configure --enable-user=mininet --enable-group=mininet`
 
 - `make`
+
