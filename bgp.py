@@ -27,6 +27,8 @@ args = parser.parse_args()
 FLAGS_rogue_as = args.rogue
 ROGUE_AS_NAME = 'R4'
 
+QUAGGA_STATE_DIR = '/var/run/quagga-1.2.4'
+
 def log(s, col="green"):
     print T.colored(s, col)
 
@@ -121,11 +123,22 @@ def startWebserver(net, hostname, text="Default web server"):
     return host.popen("python webserver.py --text '%s' > /tmp/%s.log" % (text, hostname), shell=True)
 
 
+def init_quagga_state_dir():
+	if not os.path.exists(QUAGGA_STATE_DIR):
+		os.makedirs(QUAGGA_STATE_DIR)
+
+	os.system('chown mininet:mininet %s' % QUAGGA_STATE_DIR)
+
+	return
+
+
 def main():
     os.system("rm -f /tmp/R*.log /tmp/h*.log /tmp/*R*.pid logs/*stdout")
     os.system("mn -c >/dev/null 2>&1")
     os.system("killall -9 zebra bgpd > /dev/null 2>&1")
     os.system('pgrep -f webserver.py | xargs kill -9')
+
+	init_quagga_state_dir()
 
     net = Mininet(topo=SimpleTopo(), switch=Router)
     net.start()
