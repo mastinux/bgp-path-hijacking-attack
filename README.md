@@ -1,42 +1,46 @@
 # bgp-path-hijacking-attack
 
-Base code available here: https://bitbucket.org/jvimal/bgp
+## Installazione VM
 
-Code analized and commented
+Scaricare la VM Mininet da [http://www.scs.stanford.edu/~jvimal/mininet-sigcomm14/mininet-tutorial-vm-64bit.zip](http://www.scs.stanford.edu/~jvimal/mininet-sigcomm14/mininet-tutorial-vm-64bit.zip).
+Per accedere:
+
+- username: mininet
+- password: mininet
 
 ---
 
-## Mininet preparation
+## Preparazione mininet
 
-- `git clone https://github.com/mininet/mininet`
+- `$ git clone https://github.com/mininet/mininet`
 
-- `cd mininet`
+- `$ cd mininet`
 
-- `git checkout 2.3.0d4`
+- `$ git checkout 2.3.0d4`
 
-- `util/install.sh -a`
+- `$ ./util/install.sh -a`
 
-- `mn --test pingall`
+- `$ mn --test pingall`
 
-- `mn --version`
+- `$ mn --version`
 
 ## Quagga preparation
 
-- download quagga-1.2.4 from [here](http://download.savannah.gnu.org/releases/quagga/) in your `$HOME` and extract it
+Scaricare quagga-1.2.4 from [http://download.savannah.gnu.org/releases/quagga/](http://download.savannah.gnu.org/releases/quagga/) nella tua `$HOME` ed estrai il package
 
-- `cd ~/quagga-1.2.4`
+- `$ cd ~/quagga-1.2.4`
 
-- `chown mininet:mininet /var/run/quagga`
+- `# chown mininet:mininet /var/run/quagga`
 
-- edit `configure` file, add `${quagga_statedir_prefix}/var/run/quagga` before all options in `QUAGGA_STATE_DIR` for loop 
+- modifica il file `configure`, aggiungendo `${quagga_statedir_prefix}/var/run/quagga` prima di tutte le opzioni del loop su `QUAGGA_STATE_DIR` 
 
-- `./configure --enable-user=mininet --enable-group=mininet`
+- `$ ./configure --enable-user=mininet --enable-group=mininet`
 
-- `make`
+- `$ make`
 
 ---
 
-## Attack execution
+## Esecuzione dell'attacco
 
 Per provare la simulazione, seguiamo i seguenti passi.
 
