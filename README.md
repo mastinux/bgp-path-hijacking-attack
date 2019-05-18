@@ -2,13 +2,11 @@
 
 ## Installazione VM
 
-Scaricare la VM Mininet da [http://www.scs.stanford.edu/~jvimal/mininet-sigcomm14/mininet-tutorial-vm-64bit.zip](http://www.scs.stanford.edu/~jvimal/mininet-sigcomm14/mininet-tutorial-vm-64bit.zip).
+Scaricare la VM Mininet [http://www.scs.stanford.edu/~jvimal/mininet-sigcomm14/mininet-tutorial-vm-64bit.zip](http://www.scs.stanford.edu/~jvimal/mininet-sigcomm14/mininet-tutorial-vm-64bit.zip).  
 Per accedere:
 
 - username: mininet
 - password: mininet
-
----
 
 ## Preparazione mininet
 
